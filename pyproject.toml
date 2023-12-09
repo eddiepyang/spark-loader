@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "gcp-spark"
+version = "0.0.2"
+description = ""
+authors = ["Edward Yang <eddiepyang@gmail.com>"]
+readme = "README.md"
+packages = [{include = "gcp_spark"}]
+
+[tool.poetry.dependencies]
+python = ">=3.9.2,<3.11"
+pyspark = ">=3.2.1"
+hydra-core = ">=1.1.1"
+pyarrow = ">=7.0.0"
+structlog = "^23.2.0"
+pylint = "^3.0.2"
+orjson = "^3.9.10"
+
+[tool.poetry.group.dev.dependencies]
+pytest = ">=7.1.1"
+
+[tool.poetry.dev-dependencies.black]
+version = "^22.1.0"
+allow-prereleases = true
+python = "^3.6"
+markers = "platform_python_implementation == 'CPython'"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

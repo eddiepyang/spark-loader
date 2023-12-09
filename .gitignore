@@ -1,0 +1,10 @@
+.DS_Store
+
+*.ipynb
+*.csv
+*.idea
+*.pyc
+*-checkpoint.*
+
+.vscode/*
+*/.ipynb_checkpoints/*
