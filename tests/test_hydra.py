@@ -2,7 +2,7 @@ import hydra
 from omegaconf import DictConfig, OmegaConf
 
 
-@hydra.main(config_path="../gcp_spark/local_settings", config_name="local")
+@hydra.main(config_path="../spark_loader/local_settings", config_name="local")
 def test_my_app(cfg: DictConfig):
     print(OmegaConf.to_yaml(cfg))
 

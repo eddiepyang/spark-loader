@@ -3,9 +3,9 @@ from dataclasses import dataclass
 import pyspark
 import yaml
 
-from gcp_spark import root
-from gcp_spark.config import JAR_FOLDER, JARS_CONSTANT, KEYFILE_CONSTANT, ProjectConfig
-from gcp_spark.logging import logger_factory
+from spark_loader import root
+from spark_loader.config import JAR_FOLDER, JARS_CONSTANT, KEYFILE_CONSTANT, ProjectConfig
+from spark_loader.logging import logger_factory
 
 logger = logger_factory(10)
 
@@ -54,8 +54,8 @@ class SparkClient:
     def __post_init__(self):
         self.options = {
             "viewsEnabled": "true",
-            "parentProject": f"{ProjectConfig.WRITE_PROJECT}",
-            "materializationDataset": f"{ProjectConfig.WRITE_DATASET}",
+            # "parentProject": f"{ProjectConfig.WRITE_PROJECT}",
+            # "materializationDataset": f"{ProjectConfig.WRITE_DATASET}",
         }
 
     def __repr__(self):
