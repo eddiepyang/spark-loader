@@ -2,9 +2,10 @@ from dataclasses import dataclass
 
 import pyspark
 import yaml
+from omegaconf import OmegaConf
 
 from spark_loader import root
-from spark_loader.config import JAR_FOLDER, JARS_CONSTANT, KEYFILE_CONSTANT, ProjectConfig
+from spark_loader.config import JAR_FOLDER, JARS_CONSTANT, KEYFILE_CONSTANT
 from spark_loader.logging import logger_factory
 
 logger = logger_factory(10)
@@ -47,15 +48,13 @@ class SparkClient:
     """handles spark connection and dataframe loading"""
 
     spark: pyspark.sql.SparkSession
-    write_project: str
-    write_dataset: str
-    db_type: str = "bigquery"
-
+    cfg: OmegaConf = OmegaConf.load(rf'{root}/spark_loader/local_settings/local.yaml')
     def __post_init__(self):
+        self.db_type = self.cfg.database
         self.options = {
-            "viewsEnabled": "true",
-            # "parentProject": f"{ProjectConfig.WRITE_PROJECT}",
-            # "materializationDataset": f"{ProjectConfig.WRITE_DATASET}",
+            "viewsEnabled": self.cfg.bigquery.viewsEnabled,
+            "parentProject": self.cfg.bigquery.parentProject,
+            "materializationDataset": self.cfg.bigquery.materializationDataset,
         }
 
     def __repr__(self):
