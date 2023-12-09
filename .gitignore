@@ -1,5 +1,6 @@
 .DS_Store
 
+*.log
 *.ipynb
 *.csv
 *.idea
@@ -8,3 +9,4 @@
 
 .vscode/*
 */.ipynb_checkpoints/*
+outputs/*
