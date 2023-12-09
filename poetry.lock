@@ -976,6 +976,17 @@ testing = ["build[virtualenv]", "filelock (>=3.4.0)", "flake8-2020", "ini2toml[l
 testing-integration = ["build[virtualenv] (>=1.0.3)", "filelock (>=3.4.0)", "jaraco.envs (>=2.2)", "jaraco.path (>=3.2.0)", "packaging (>=23.1)", "pytest", "pytest-enabler", "pytest-xdist", "tomli", "virtualenv (>=13.0.0)", "wheel"]
 
 [[package]]
+name = "spark-nlp"
+version = "5.2.0"
+description = "John Snow Labs Spark NLP is a natural language processing library built on top of Apache Spark ML. It provides simple, performant & accurate NLP annotations for machine learning pipelines, that scale easily in a distributed environment."
+optional = false
+python-versions = "*"
+files = [
+    {file = "spark-nlp-5.2.0.tar.gz", hash = "sha256:d5735efc1b3e2d2df5d4311838583baec2af0b5fffb3773168d1cdd1feb91ae9"},
+    {file = "spark_nlp-5.2.0-py2.py3-none-any.whl", hash = "sha256:1f1b6ce17874b0ed694f6383a367a831a6fe5ad2605ea01cd61f850d218e3486"},
+]
+
+[[package]]
 name = "structlog"
 version = "23.2.0"
 description = "Structured Logging for Python"
@@ -1058,4 +1069,4 @@ requests = "*"
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9.2,<3.11"
-content-hash = "b861bdcc6cd567543e9622011499fb9238adceb1a020f0e75f39abc8b099fe97"
+content-hash = "bfb2124ab852cf5303d2491459563d28959b0bafacd905f23ed381329c982ffb"
