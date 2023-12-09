@@ -4,7 +4,7 @@ version = "0.0.2"
 description = ""
 authors = ["Edward Yang <eddiepyang@gmail.com>"]
 readme = "README.md"
-packages = [{include = "gcp_spark"}]
+packages = [{include = "spark-loader"}]
 
 [tool.poetry.dependencies]
 python = ">=3.9.2,<3.11"
