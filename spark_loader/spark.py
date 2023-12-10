@@ -1,11 +1,11 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 import pyspark
 import yaml
 from omegaconf import OmegaConf
 
 from spark_loader import root
-from spark_loader.config import JAR_FOLDER, JARS_KEY, KEYFILE_KEY
+from spark_loader.config import JAR_FOLDER, JARS_KEY, KEYFILE_KEY, PACKAGES_KEY
 from spark_loader.logging import logger_factory
 
 logger = logger_factory(10)
@@ -15,8 +15,8 @@ def setSparkConfig(settings: dict, conf: pyspark.SparkConf) -> None:
     for setting, value in settings["spark"].items():
         if setting == JARS_KEY:
             value = ", ".join([f"{root}/{JAR_FOLDER}/{item}" for item in value])
-        if setting == PACKAGES_CONSTANT:
-            value = ", ".join(PACKAGES_CONSTANT)
+        if setting == PACKAGES_KEY:
+            value = ", ".join(value)
         if setting == KEYFILE_KEY:
             value = f"{root}/{value}"
         logger.debug("showing settings: ", key=setting, value=value)
@@ -50,7 +50,7 @@ class SparkClient:
     """handles spark connection and dataframe loading"""
 
     spark: pyspark.sql.SparkSession
-    cfg: OmegaConf = OmegaConf.load(rf'{root}/spark_loader/local_settings/local.yaml')
+    cfg: OmegaConf = field(default=OmegaConf.load(rf'{root}/local_settings/local.yaml'))
     def __post_init__(self):
         self.db_type = self.cfg.database
         self.options = {

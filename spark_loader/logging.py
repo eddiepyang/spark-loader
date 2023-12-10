@@ -13,4 +13,4 @@ def logger_factory(level: int):
         structlog.processors.JSONRenderer(json.dumps),
         ],
     )
-    return structlog.get_logger()
+    return structlog.getLogger()
