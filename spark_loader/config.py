@@ -1,8 +1,10 @@
 """ stuff """
 from dataclasses import dataclass
 
-JARS_CONSTANT = "spark.jars"
-KEYFILE_CONSTANT = "spark.hadoop.google.cloud.auth.service.account.json.keyfile"
+JARS_KEY = "spark.jars"
+PACKAGES_KEY = "spark.jars.packages"
+KEYFILE_KEY = "spark.hadoop.google.cloud.auth.service.account.json.keyfile"
+
 JAR_FOLDER = "jars"
 
 

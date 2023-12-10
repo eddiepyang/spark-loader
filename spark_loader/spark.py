@@ -5,7 +5,7 @@ import yaml
 from omegaconf import OmegaConf
 
 from spark_loader import root
-from spark_loader.config import JAR_FOLDER, JARS_CONSTANT, KEYFILE_CONSTANT
+from spark_loader.config import JAR_FOLDER, JARS_KEY, KEYFILE_KEY
 from spark_loader.logging import logger_factory
 
 logger = logger_factory(10)
@@ -13,9 +13,11 @@ logger = logger_factory(10)
 
 def setSparkConfig(settings: dict, conf: pyspark.SparkConf) -> None:
     for setting, value in settings["spark"].items():
-        if setting == JARS_CONSTANT:
+        if setting == JARS_KEY:
             value = ", ".join([f"{root}/{JAR_FOLDER}/{item}" for item in value])
-        if setting == KEYFILE_CONSTANT:
+        if setting == PACKAGES_CONSTANT:
+            value = ", ".join(PACKAGES_CONSTANT)
+        if setting == KEYFILE_KEY:
             value = f"{root}/{value}"
         logger.debug("showing settings: ", key=setting, value=value)
         conf.set(setting, value)
