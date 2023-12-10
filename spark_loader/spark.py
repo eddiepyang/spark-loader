@@ -29,7 +29,7 @@ def loadSettings(yaml_settings_path) -> dict:
 
 
 def NewSparkSession(
-    master: str, app: str, yaml_settings_path: str, log_level: str = "ERROR"
+    master: str, app: str, yaml_settings_path: str, log_level: str = "error"
 ) -> pyspark.sql.SparkSession:
     """creates a new spark session"""
     try:
@@ -39,7 +39,8 @@ def NewSparkSession(
         sc = pyspark.SparkContext(conf=conf)
         context = sc.getOrCreate()
         context.setLogLevel(log_level)
-        return pyspark.sql.SparkSession.builder.config(conf=sc.getConf()).getOrCreate()
+        return pyspark.sql.SparkSession(context).builder.getOrCreate()
+        
     except ValueError as exception:
         logger.exception("failed to create new session", exception=exception)
         return pyspark.sql.SparkSession.getActiveSession()
