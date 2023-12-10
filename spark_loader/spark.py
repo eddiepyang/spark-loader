@@ -29,7 +29,7 @@ def loadSettings(yaml_settings_path) -> dict:
 
 
 def NewSparkSession(
-    master: str, app: str, yaml_settings_path: str, log_level: str = "error"
+    master: str, app: str, yaml_settings_path: str, log_level: str = "ERROR"
 ) -> pyspark.sql.SparkSession:
     """creates a new spark session"""
     try:
