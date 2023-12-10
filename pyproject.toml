@@ -8,7 +8,7 @@ packages = [{include = "spark_loader"}]
 
 [tool.poetry.dependencies]
 python = ">=3.9.2,<3.11"
-pyspark = ">=3.2.1"
+pyspark = "~=3.3.1"
 hydra-core = ">=1.1.1"
 pyarrow = ">=7.0.0"
 structlog = "^23.2.0"
