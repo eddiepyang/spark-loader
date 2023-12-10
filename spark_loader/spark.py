@@ -40,7 +40,7 @@ def NewSparkSession(
         context = sc.getOrCreate()
         context.setLogLevel(log_level)
         return pyspark.sql.SparkSession(context).builder.getOrCreate()
-        
+
     except ValueError as exception:
         logger.exception("failed to create new session", exception=exception)
         return pyspark.sql.SparkSession.getActiveSession()
@@ -51,7 +51,8 @@ class SparkClient:
     """handles spark connection and dataframe loading"""
 
     spark: pyspark.sql.SparkSession
-    cfg: OmegaConf = field(default=OmegaConf.load(rf'{root}/local_settings/local.yaml'))
+    cfg: OmegaConf = field(default=OmegaConf.load(rf"{root}/conf/local.yaml"))
+
     def __post_init__(self):
         self.db_type = self.cfg.database
         self.options = {

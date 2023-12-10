@@ -9,6 +9,8 @@ spark:
     # spark.hadoop.google.cloud.auth.service.account.json.keyfile: 
     fs.gs.impl: com.google.cloud.hadoop.fs.gcs.GoogleHadoopFileSystem # hadoop fs
     spark.sql.execution.arrow.pyspark.enabled: true # use arrow
+    spark.driver.extraJavaOptions: -Dlog4j.configuration=file:/home/ryeyoo/projects/spark-loader/conf/log4j.properties
+    spark.executor.extraJavaOptions: -Dlog4j.configuration=file:/home/ryeyoo/projects/spark-loader/conf/log4j.properties
 
 bigquery:
     viewsEnabled: true
