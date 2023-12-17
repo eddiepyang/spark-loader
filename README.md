@@ -1,24 +1,31 @@
 Load session prior to running
-```import sparknlp
-from sparknlp.base import *
-from sparknlp.annotator import *
-from pyspark.sql import SparkSession
+```
+from sparknlp.base import  DocumentAssembler, Pipeline
+from sparknlp.annotator import NerDLModel, NerDLApproach, GraphExtraction, UniversalSentenceEncoder
 
 
 # load spark session before this
+
 use = UniversalSentenceEncoder \
-    .pretrained("tfhub_use_multi", "xx") \
+    .pretrained() \
     .setInputCols("document") \
     .setOutputCol("use_embeddings")
-document_assembler = DocumentAssembler().setInputCol("value").setOutputCol("document")
 
-tokenizer = Tokenizer().setInputCols(["document"]).setOutputCol("token")
+document_assembler = DocumentAssembler() \
+    .setInputCol("value") \
+    .setOutputCol("document")
+
+tokenizer = Tokenizer() \
+    .setInputCols(["document"]) \
+    .setOutputCol("token")
 
 word_embeddings = WordEmbeddingsModel.pretrained() \
     .setInputCols(["document", "token"]) \
     .setOutputCol("embeddings")
 
-ner_tagger = NerDLModel.pretrained() \
+
+ner_tagger = NerDLModel \
+    .pretrained() \
     .setInputCols(["document", "token", "embeddings"]) \
     .setOutputCol("ner")
 
@@ -28,9 +35,13 @@ graph_extraction = GraphExtraction() \
             .setRelationshipTypes(["lad-PER", "lad-LOC"]) \
             .setMergeEntities(True)
 
-graph_pipeline = Pipeline().setStages([document_assembler, tokenizer,
-                                       word_embeddings, ner_tagger,
-                                       graph_extraction])
+graph_pipeline = Pipeline() \
+    .setStages([
+        document_assembler, tokenizer,
+        word_embeddings, ner_tagger,
+        graph_extraction
+    ])
 
-res_df = graph_pipeline.fit(df).transform(df)
+df = sess.read.text('./data/train.dat')
+graph_pipeline.fit(df).transform(df)
 ```
