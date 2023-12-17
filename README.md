@@ -23,7 +23,8 @@ tokenizer = Tokenizer() \
     .setInputCols(["document"]) \
     .setOutputCol("token")
 
-word_embeddings = WordEmbeddingsModel.pretrained() \
+word_embeddings = WordEmbeddingsModel \
+    .pretrained() \
     .setInputCols(["document", "token"]) \
     .setOutputCol("embeddings")
 
