@@ -1,7 +1,11 @@
 Load session prior to running
 ```
 from sparknlp.base import  DocumentAssembler, Pipeline
-from sparknlp.annotator import NerDLModel, NerDLApproach, GraphExtraction, UniversalSentenceEncoder
+from sparknlp.annotator import (
+    NerDLModel, NerDLApproach, 
+    GraphExtraction, UniversalSentenceEncoder,
+    Tokenizer, WordEmbeddingsModel
+)
 
 
 # load spark session before this
