@@ -1,20 +1,21 @@
 [tool.poetry]
 name = "spark-loader"
 version = "0.0.2"
-description = ""
+description = "loads spark"
 authors = ["Edward Yang <eddiepyang@gmail.com>"]
 readme = "README.md"
 packages = [{include = "spark_loader"}]
 
 [tool.poetry.dependencies]
 python = ">=3.9.2,<3.11"
-pyspark = "~=3.3.1"
+pyspark = "=3.3.1"
 hydra-core = ">=1.1.1"
 pyarrow = ">=7.0.0"
 structlog = "^23.2.0"
-orjson = "^3.9.10"
 spark-nlp = "^5.2.0"
 pandas-gbq = "^0.19.2"
+scispacy = "^0.5.3"
+python-rapidjson = "^1.13"
 
 [tool.poetry.group.dev.dependencies]
 pytest = ">=7.1.1"
