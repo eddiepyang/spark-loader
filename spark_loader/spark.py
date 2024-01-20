@@ -8,15 +8,16 @@ from spark_loader import root
 from spark_loader.config import JAR_FOLDER, JARS_KEY, KEYFILE_KEY, PACKAGES_KEY
 from spark_loader.logging import logger_factory
 
+GCP_CONF_PATH = "conf/gcp.yaml"
 logger = logger_factory(10)
 
 
 def setSparkConfig(settings: dict, conf: pyspark.SparkConf) -> None:
     for setting, value in settings["spark"].items():
         if setting == JARS_KEY:
-            value = ", ".join([f"{root}/{JAR_FOLDER}/{item}" for item in value])
+            value = ",".join([f"{root}/{JAR_FOLDER}/{item}" for item in value])
         if setting == PACKAGES_KEY:
-            value = ", ".join(value)
+            value = ",".join(value)
         if setting == KEYFILE_KEY:
             value = f"{root}/{value}"
         logger.debug("showing settings: ", key=setting, value=value)
@@ -44,6 +45,13 @@ def NewSparkSession(
     except ValueError as exception:
         logger.exception("failed to create new session", exception=exception)
         return pyspark.sql.SparkSession.getActiveSession()
+
+
+def NewGCPSession(
+    master: str,
+    app: str,
+) -> pyspark.sql.SparkSession:
+    return NewSparkSession(master, app, root / GCP_CONF_PATH)
 
 
 @dataclass
