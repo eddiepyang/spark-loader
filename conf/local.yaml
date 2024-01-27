@@ -1,4 +1,4 @@
-database: bigquery # {bigquery, snowflake}
+database:  # {bigquery, snowflake}
 bucket: # {name of bucket}
 
 hadoop:

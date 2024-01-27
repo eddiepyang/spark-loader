@@ -1,4 +1,9 @@
-Load session prior to running
+Must start session prior to running
+
+### Example jobs:
+
+graph extraction
+
 ```
 from sparknlp.base import  DocumentAssembler, Pipeline
 from sparknlp.annotator import (
@@ -49,4 +54,65 @@ graph_pipeline = Pipeline() \
 
 df = sess.read.text('./data/train.dat')
 graph_pipeline.fit(df).transform(df)
+```
+
+lda topic modeling
+
+```
+from pyspark.ml.clustering import LDA
+from pyspark.ml.feature import CountVectorizer
+ 
+document_assembler = DocumentAssembler() \
+    .setInputCol("value") \
+    .setOutputCol("document") \
+    .setCleanupMode("shrink")
+
+tokenizer = Tokenizer() \
+  .setInputCols(["document"]) \
+  .setOutputCol("token")
+
+normalizer = Normalizer() \
+    .setInputCols(["token"]) \
+    .setOutputCol("normalized")
+
+stopwords_cleaner = StopWordsCleaner()\
+      .setInputCols("normalized")\
+      .setOutputCol("cleanTokens")\
+      .setCaseSensitive(False)
+
+stemmer = Stemmer() \
+    .setInputCols(["cleanTokens"]) \
+    .setOutputCol("stem")
+
+finisher = Finisher() \
+    .setInputCols(["stem"]) \
+    .setOutputCols(["tokens"]) \
+    .setOutputAsArray(True) \
+    .setCleanAnnotations(False)
+
+pipe = Pipeline(
+    stages=[document_assembler, 
+            tokenizer,
+            normalizer,
+            stopwords_cleaner, 
+            stemmer, 
+            finisher])
+
+nlp_model = nlp_pipeline.fit(df)
+processed_df  = nlp_model.transform(df)
+
+cv = CountVectorizer(inputCol="tokens", outputCol="features", vocabSize=12000, minDF=3.0) 
+cv_model = cv.fit(processed_df) 
+vectorized_tokens = cv_model.transform(processed_df)
+
+print("forming topics")
+
+num_topics = 10
+lda = LDA(k=num_topics, maxIter=50)
+model = lda.fit(vectorized_tokens)
+ll = model.logLikelihood(vectorized_tokens)
+lp = model.logPerplexity(vectorized_tokens)
+print("The lower bound on the log likelihood of the entire corpus: " + str(ll))
+print("The upper bound on perplexity: " + str(lp))
+
 ```
