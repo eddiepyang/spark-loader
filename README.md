@@ -59,6 +59,10 @@ graph_pipeline.fit(df).transform(df)
 lda topic modeling
 
 ```
+from sparknlp.base import  DocumentAssembler, Pipeline, Finisher
+from sparknlp.annotator import (
+  Normalizer, Tokenizer, StopWordsCleaner, Stemmer
+)
 from pyspark.ml.clustering import LDA
 from pyspark.ml.feature import CountVectorizer
  
