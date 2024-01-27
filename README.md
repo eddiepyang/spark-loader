@@ -1,8 +1,14 @@
-Must start session prior to running
+This package is a configuration loading tool for pyspark. Spark configs are specified in yaml with some examples in the conf folder. The primary entry point to loading spark is through the NewSparkSession class. Used like this:
 
-### Example jobs:
+```
+from spark_loader.spark import NewSparkSession
+ 
+sess = NewSparkSession('local', 'main', './conf/local.yaml')
+```
 
-graph extraction
+The spark-nlp library is included, some workflow examples are with an initiated session are:
+
+## Graph extraction
 
 ```
 from sparknlp.base import  DocumentAssembler, Pipeline
@@ -56,7 +62,7 @@ df = sess.read.text('./data/train.dat')
 graph_pipeline.fit(df).transform(df)
 ```
 
-lda topic modeling
+## LDA topic modeling
 
 ```
 from sparknlp.base import  DocumentAssembler, Pipeline, Finisher
