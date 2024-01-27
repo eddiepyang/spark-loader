@@ -1,14 +1,13 @@
 [tool.poetry]
 name = "spark-loader"
-version = "0.0.4"
+version = "0.0.5"
 description = "loads spark"
 authors = ["Edward Yang <eddiepyang@gmail.com>"]
 readme = "README.md"
 packages = [{include = "spark_loader"}]
-include = ["conf"]
 
 [tool.poetry.dependencies]
-python = ">=3.9.2,<3.11"
+python = ">=3.9,<3.12"
 pyspark = "~3.3.1"
 hydra-core = ">=1.1.1"
 pyarrow = ">=7.0.0"
