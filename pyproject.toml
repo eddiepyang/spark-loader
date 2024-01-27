@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "spark-loader"
-version = "0.0.3"
+version = "0.0.4"
 description = "loads spark"
 authors = ["Edward Yang <eddiepyang@gmail.com>"]
 readme = "README.md"
@@ -14,8 +14,6 @@ hydra-core = ">=1.1.1"
 pyarrow = ">=7.0.0"
 structlog = "^23.2.0"
 spark-nlp = "^5.2.0"
-pandas-gbq = "^0.19.2"
-scispacy = "^0.5.3"
 python-rapidjson = "^1.13"
 
 [tool.poetry.group.dev.dependencies]

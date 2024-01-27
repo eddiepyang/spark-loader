@@ -6,6 +6,8 @@
 *.idea
 *.pyc
 *.dat
+*.tar.gz
+*.whl
 *-checkpoint.*
 
 .vscode/*
